@@ -56,7 +56,6 @@ RSpec.describe User, type: :model do
     it 'birth_dayが空では登録できない' do
       @user.birth_day = ''
       @user.valid?
-      binding.pry
       expect(@user.errors.full_messages).to include("Birth day can't be blank")
     end
     it '重複したemailが存在する場合登録できない' do
