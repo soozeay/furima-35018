@@ -24,15 +24,19 @@ Things you may want to cover:
 * ...
 
 ## users テーブル
-| Column          | Type   | Options                   |
-| --------------- | ------ | ------------------------- |
-| nickname        | string | null: false               |
-| email           | string | null: false, unique: true |
-| encrypted_password | string | null: false            |
-| last_name       | string | null: false               |
-| first_name      | string | null: false               |
-| last_name_kana  | string | null: false               |
-| first_name_kana | string | null: false               |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_name_kana     | string  | null: false               |
+| first_name_kana    | string  | null: false               |
+| birth_year_id      | integer | null: false               |
+| birth_month_id     | integer | null: false               |
+| birth_day_id       | integer | null: false               |
+
 
 ### Association
 - has_many: items
@@ -41,18 +45,17 @@ Things you may want to cover:
 
 
 ## items テーブル
-| Column           | Type       | Options                       |
-| ---------------- | ---------- | ------------------------------|
-| name             | string     | null: false                   |
-| desc             | text       | null: false                   |
-| price            | integer    | null: false                   |
-| user             | references | null: false foreign_key: true |
-| category_id      | integer    | null: false foreign_key: true |
-| status_id        | integer    | null: false foreign_key: true |
-| shipping_fee_id  | integer    | null: false foreign_key: true |
-| prefecture_id    | integer    | null: false foreign_key: true |
-| shipment_src_id  | integer    | null: false foreign_key: true |
-| esd_id           | integer    | null: false foreign_key: true |
+| Column           | Type       | Options     |
+| ---------------- | ---------- | ------------|
+| name             | string     | null: false |
+| desc             | text       | null: false |
+| price            | integer    | null: false |
+| user             | references | null: false |
+| category_id      | integer    | null: false |
+| status_id        | integer    | null: false |
+| shipping_fee_id  | integer    | null: false |
+| shipment_src_id  | integer    | null: false |
+| esd_id           | integer    | null: false |
 
 
 
@@ -111,6 +114,7 @@ Things you may want to cover:
 ### Association
 - belongs_to: item
 
+
 ## status(active_hash)
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
@@ -118,6 +122,7 @@ Things you may want to cover:
 
 ### Association
 - belongs_to: item
+
 
 ## shipping_fee(active_hash)
 | Column       | Type   | Options     |
@@ -127,6 +132,7 @@ Things you may want to cover:
 ### Association
 - belongs_to: item
 
+
 ## shipment_src(active_hash)
 | Column       | Type   | Options     |
 | ------------ | ------ | ----------- |
@@ -134,6 +140,7 @@ Things you may want to cover:
 
 ### Association
 - belongs_to: item
+
 
 ## esd(active_hash)
 | Column | Type   | Options     |
@@ -143,6 +150,7 @@ Things you may want to cover:
 ### Association
 - belongs_to: item
 
+
 ## prefecture(active_hash)
 | Column     | Type   | Options     |
 | ---------- | ------ | ----------- |
@@ -151,3 +159,30 @@ Things you may want to cover:
 ### Association
 - belongs_to: item
 - belongs_to: address
+
+
+## birth_year(active_hash)
+| Column     | Type   | Options     |
+| ---------- | ------ | ----------- |
+| birth_year | string | null: false |
+
+### Association
+- belongs_to: user
+
+
+## birth_month(active_hash)
+| Column      | Type   | Options     |
+| ----------- | ------ | ----------- |
+| birth_month | string | null: false |
+
+### Association
+- belongs_to: user
+
+
+## birth_day(active_hash)
+| Column    | Type   | Options     |
+| --------- | ------ | ----------- |
+| birth_day | string | null: false |
+
+### Association
+- belongs_to: user
