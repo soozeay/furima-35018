@@ -33,9 +33,7 @@ Things you may want to cover:
 | first_name         | string  | null: false               |
 | last_name_kana     | string  | null: false               |
 | first_name_kana    | string  | null: false               |
-| birth_year_id      | integer | null: false               |
-| birth_month_id     | integer | null: false               |
-| birth_day_id       | integer | null: false               |
+| birth_day          | date    | null: false               |
 
 
 ### Association
@@ -104,85 +102,3 @@ Things you may want to cover:
 
 ### Association
 - belongs_to: order
-
-
-## category(active_hash)
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| category | string | null: false |
-
-### Association
-- belongs_to: item
-
-
-## status(active_hash)
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| status | string | null: false |
-
-### Association
-- belongs_to: item
-
-
-## shipping_fee(active_hash)
-| Column       | Type   | Options     |
-| ------------ | ------ | ----------- |
-| shipping_fee | string | null: false |
-
-### Association
-- belongs_to: item
-
-
-## shipment_src(active_hash)
-| Column       | Type   | Options     |
-| ------------ | ------ | ----------- |
-| shipment_src | string | null: false |
-
-### Association
-- belongs_to: item
-
-
-## esd(active_hash)
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| est    | string | null: false |
-
-### Association
-- belongs_to: item
-
-
-## prefecture(active_hash)
-| Column     | Type   | Options     |
-| ---------- | ------ | ----------- |
-| prefecture | string | null: false |
-
-### Association
-- belongs_to: item
-- belongs_to: address
-
-
-## birth_year(active_hash)
-| Column     | Type   | Options     |
-| ---------- | ------ | ----------- |
-| birth_year | string | null: false |
-
-### Association
-- belongs_to: user
-
-
-## birth_month(active_hash)
-| Column      | Type   | Options     |
-| ----------- | ------ | ----------- |
-| birth_month | string | null: false |
-
-### Association
-- belongs_to: user
-
-
-## birth_day(active_hash)
-| Column    | Type   | Options     |
-| --------- | ------ | ----------- |
-| birth_day | string | null: false |
-
-### Association
-- belongs_to: user
