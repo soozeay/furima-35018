@@ -43,17 +43,17 @@ Things you may want to cover:
 
 
 ## items テーブル
-| Column           | Type       | Options     |
-| ---------------- | ---------- | ------------|
-| name             | string     | null: false |
-| desc             | text       | null: false |
-| price            | integer    | null: false |
-| user             | references | null: false |
-| category_id      | integer    | null: false |
-| status_id        | integer    | null: false |
-| shipping_fee_id  | integer    | null: false |
-| shipment_src_id  | integer    | null: false |
-| esd_id           | integer    | null: false |
+| Column          | Type       | Options     |
+| --------------- | ---------- | ------------|
+| name            | string     | null: false |
+| desc            | text       | null: false |
+| price           | integer    | null: false |
+| user            | references | null: false |
+| category_id     | integer    | null: false |
+| status_id       | integer    | null: false |
+| shipping_fee_id | integer    | null: false |
+| prefecture_id   | integer    | null: false |
+| esd_id          | integer    | null: false |
 
 
 
@@ -90,15 +90,15 @@ Things you may want to cover:
 
 
 ## addresses テーブル
-| Column        | Type       | Options                       |
-| ------------- | ---------- | ----------------------------- |
-| postal_code   | string     | null: false                   |
-| city          | string     | null: false                   |
-| house_number  | string     | null: false                   |
-| building_name | string     |                               |
-| phone_number  | string     | null: false                   |
-| order         | references | null: false foreign_key: true |
-| prefecture_id | integer    | null: false foreign_key: true |
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| postal_code   | string     | null: false |
+| city          | string     | null: false |
+| house_number  | string     | null: false |
+| building_name | string     |             |
+| phone_number  | string     | null: false |
+| order         | references | null: false |
+| prefecture_id | integer    | null: false |
 
 ### Association
 - belongs_to: order
