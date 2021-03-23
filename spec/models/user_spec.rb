@@ -61,15 +61,41 @@ RSpec.describe User, type: :model do
     it '重複したemailが存在する場合登録できない' do
       @user.save
       another_user = FactoryBot.build(:user)
-        another_user.email = @user.email
-        another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
+      another_user.email = @user.email
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
     end
     it 'passwordが5文字以下では登録できない' do
       @user.password = '00000'
-        @user.password_confirmation = '00000'
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+      @user.password_confirmation = '00000'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+    end
+    it 'last_nameが漢字・平仮名・カタカナ意外では登録できない' do
+      @user.last_name_kana = 'aaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana is invalid. Input full-width katakana characters.")
+    end
+    it 'first_nameが漢字・平仮名・カタカナ意外では登録できない' do
+      @user.first_name_kana = 'aaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters.")
+    end
+    it 'last_name_kanaが全角カタカナ意外では登録できないこと' do
+      @user.first_name_kana = 'ｱｲｳｴｵ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters.")
+    end
+    it 'emailは@を含まないと登録できない' do
+      @user.email = 'aaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+    it 'passwordは英語のみでは登録できない' do
+      @user.password = 'aaaaaa'
+      @user.password_confirmation = 'aaaaaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
     end
   end
 
