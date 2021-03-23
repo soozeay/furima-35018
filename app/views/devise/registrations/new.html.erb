@@ -5,6 +5,7 @@
 <%# //「モデル名」にはUserモデルであれば@userを渡しましょう。「新規登録機能へのパス」は、devise導入後にrails routesを実行してdevise/registrations#createへのパスを確認し、記載してください。 %>
 <div class='form-wrap'>
   <div class='form-header'>
+    <%= devise_error_messages! %>
     <h1 class='form-header-text'>
       会員情報入力
     </h1>
