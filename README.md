@@ -41,12 +41,20 @@ Things you may want to cover:
 
 
 ## items テーブル
-| Column    | Type       | Options                       |
-| --------- | ---------- | ------------------------------|
-| item_name | string     | null: false                   |
-| item_desc | text       | null: false                   |
-| price     | integer    | null: false                   |
-| user      | references | null: false foreign_key: true |
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ------------------------------|
+| name             | string     | null: false                   |
+| desc             | text       | null: false                   |
+| price            | integer    | null: false                   |
+| user             | references | null: false foreign_key: true |
+| category_id      | integer    | null: false foreign_key: true |
+| status_id        | integer    | null: false foreign_key: true |
+| shipping_fee_id  | integer    | null: false foreign_key: true |
+| prefecture_id    | integer    | null: false foreign_key: true |
+| shipment_src_id  | integer    | null: false foreign_key: true |
+| esd_id           | integer    | null: false foreign_key: true |
+
+
 
 ### Association
 - belongs_to: user
@@ -89,6 +97,7 @@ Things you may want to cover:
 | building_name | string     |                               |
 | phone_number  | string     | null: false                   |
 | order         | references | null: false foreign_key: true |
+| prefecture_id | integer    | null: false foreign_key: true |
 
 ### Association
 - belongs_to: order
@@ -133,3 +142,12 @@ Things you may want to cover:
 
 ### Association
 - belongs_to: item
+
+## prefecture(active_hash)
+| Column     | Type   | Options     |
+| ---------- | ------ | ----------- |
+| prefecture | string | null: false |
+
+### Association
+- belongs_to: item
+- belongs_to: address
