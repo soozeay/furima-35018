@@ -16,4 +16,10 @@ class Item < ApplicationRecord
     validates :esd_id
   end
 
+  belongs_to :category
+  belongs_to :status
+  belongs_to :shipping_fee
+  belongs_to :prefecture
+  belongs_to :esd
+
 end
