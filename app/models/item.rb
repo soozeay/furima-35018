@@ -5,11 +5,14 @@ class Item < ApplicationRecord
     validates :price
   end
   belongs_to: user
-  
+
   extend Activehash::Associations::ActiveRecordExtentions
-  belongs_to: category
-  has_one: status
-  has_one: shipping_fee
-  has_many: prefecture
-  has_one: esd
+  with_options numericality: {other_than: 0} do
+    belongs_to: category_id
+    belongs_to: status_id
+    belongs_to: shipping_fee_id
+    belongs_to: prefecture_id
+    belongs_to: esd_id
+  end
+
 end
