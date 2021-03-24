@@ -5,6 +5,7 @@ class Item < ApplicationRecord
     validates :price
   end
   belongs_to: user
+  has_one_attached :image
 
   extend Activehash::Associations::ActiveRecordExtentions
   with_options numericality: {other_than: 0} do
