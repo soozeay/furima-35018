@@ -96,5 +96,3 @@ RSpec.describe Item, type: :model do
     end
   end
 end
-
-# bundle exec rspec spec/models/item_spec.rb
