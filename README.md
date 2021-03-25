@@ -43,17 +43,17 @@ Things you may want to cover:
 
 
 ## items テーブル
-| Column          | Type       | Options                       |
-| --------------- | ---------- | ------------------------------|
-| name            | string     | null: false                   |
-| desc            | text       | null: false                   |
-| price           | integer    | null: false                   |
-| user            | references | null: false foreign_key: true |
-| category_id     | integer    | null: false                   |
-| status_id       | integer    | null: false                   |
-| shipping_fee_id | integer    | null: false                   |
-| prefecture_id   | integer    | null: false                   |
-| esd_id          | integer    | null: false                   |
+| Column         | Type       | Options                       |
+| -------------- | ---------- | ------------------------------|
+| name           | string     | null: false                   |
+| desc           | text       | null: false                   |
+| price          | integer    | null: false                   |
+| user           | references | null: false foreign_key: true |
+| category_id    | integer    | null: false                   |
+| status_id      | integer    | null: false                   |
+| shippingfee_id | integer    | null: false                   |
+| prefecture_id  | integer    | null: false                   |
+| esd_id         | integer    | null: false                   |
 
 
 
