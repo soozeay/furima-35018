@@ -36,78 +36,78 @@ RSpec.describe Item, type: :model do
       it '商品価格（price）が300円未満では登録できない' do
         @item.price = Faker::Number.between(from: 0, to: 299)
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '商品価格（price）が9,999,999円より大きければ登録できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it '商品価格（price）が半角数字意外では登録できない（全角数字）' do
         @item.price = '９９９'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '商品価格（price）が半角数字意外では登録できない（半角英数字の混同）' do
         @item.price = 'aaa11'
         @item.valid?
         binding.pry
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '商品価格（price）が半角数字意外では登録できない（半角英字のみ）' do
         @item.price = 'aaaaa'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '商品カテゴリ（category_id）が空では登録できない' do
         @item.category_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
+        expect(@item.errors.full_messages).to include("Category can't be blank", 'Category is not a number')
       end
       it '商品カテゴリ（category_id）のid:0では登録できない' do
         @item.category_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 0")
+        expect(@item.errors.full_messages).to include('Category must be other than 0')
       end
       it '商品の状態（status_id）が空では登録できない' do
         @item.status_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank", "Status is not a number")
+        expect(@item.errors.full_messages).to include("Status can't be blank", 'Status is not a number')
       end
       it '商品の状態（status_id）のid:0では登録できない' do
         @item.status_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status must be other than 0")
+        expect(@item.errors.full_messages).to include('Status must be other than 0')
       end
       it '配送料の負担（shippingfee）が空では登録できない' do
         @item.shippingfee_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shippingfee can't be blank", "Shippingfee is not a number")
+        expect(@item.errors.full_messages).to include("Shippingfee can't be blank", 'Shippingfee is not a number')
       end
       it '配送料の負担（shippingfee）のid:0では登録できない' do
         @item.shippingfee_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shippingfee must be other than 0")
+        expect(@item.errors.full_messages).to include('Shippingfee must be other than 0')
       end
       it '発送元（prefecture）が空では登録できない' do
         @item.prefecture_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not a number")
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
       end
       it '発送元（prefecture）のid:0では登録できない' do
         @item.prefecture_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
       end
       it '配送日の目安（esd）が空では登録できない' do
-        @item.esd_id =''
+        @item.esd_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Esd can't be blank", "Esd is not a number")
+        expect(@item.errors.full_messages).to include("Esd can't be blank", 'Esd is not a number')
       end
       it '配送日の目安（esd）のid:0では登録できない' do
         @item.esd_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Esd must be other than 0")
+        expect(@item.errors.full_messages).to include('Esd must be other than 0')
       end
     end
   end
