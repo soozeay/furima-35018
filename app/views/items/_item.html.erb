@@ -1,5 +1,5 @@
 <li class='list'>
-  <%= link_to "#" do %>
+  <%= link_to item_path(item.id) do %>
     <div class='item-img-content'>
       <%= image_tag item.image, class: "item-img" %>
 
@@ -15,7 +15,7 @@
         <%= item.name %>
       </h3>
       <div class='item-price'>
-        <span><%= item.price %>円<br><%= item.shippingfee.name %></span>
+        <span><%= item.price.to_s(:delimited, delimiter: ',') %>円<br><%= item.shippingfee.name %></span>
         <div class='star-btn'>
           <%= image_tag "star.png", class:"star-icon" %>
           <span class='star-count'>0</span>
