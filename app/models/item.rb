@@ -2,14 +2,14 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :desc
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
     validates :image
   end
   belongs_to :user
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  with_options presence: true, numericality: { other_than: 0 }  do
+  with_options presence: true, numericality: { other_than: 0 } do
     validates :category_id
     validates :status_id
     validates :shippingfee_id
@@ -22,5 +22,4 @@ class Item < ApplicationRecord
   belongs_to :shippingfee
   belongs_to :prefecture
   belongs_to :esd
-
 end
