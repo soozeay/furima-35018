@@ -51,7 +51,6 @@ RSpec.describe Item, type: :model do
       it '商品価格（price）が半角数字意外では登録できない（半角英数字の混同）' do
         @item.price = 'aaa11'
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '商品価格（price）が半角数字意外では登録できない（半角英字のみ）' do
