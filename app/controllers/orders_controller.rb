@@ -39,7 +39,9 @@ before_action :move_to_index
   end
 
   def move_to_index
-    if user_signed_in? && @item.user.id == current_user.id
+    if @item.user.id == current_user.id && @item.order.present?
+      redirect_to root_path
+    elsif @item.order.present?
       redirect_to root_path
     end
   end
