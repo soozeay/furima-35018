@@ -9,7 +9,5 @@ FactoryBot.define do
     house_number   { Faker::Address.street_address }
     building_name  { Faker::Address.building_number }
     phone_number   { Faker::Number.number(digits: 11) }
-    association :item, factory: :items
-    user_id { @item.user_id }
   end
 end

@@ -8,7 +8,7 @@ RSpec.describe OrderAddress, type: :model do
     sleep 0.5
   end
 
-  describe 'クレジットカード決済（トークンの保存）' do
+  describe 'クレジットカード決済' do
     context '登録できるとき' do
       it 'フォームの情報が全てあれば登録できる' do
         expect(@order_address).to be_valid
@@ -148,6 +148,16 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone_number = '090-1111-1111'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'user_idが空では登録できない' do
+        @order_address.user_id = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空では登録できない' do
+        @order_address.item_id = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
