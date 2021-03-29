@@ -41,23 +41,33 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Postal code is invalid')
       end
       it '郵便番号が数字以外では登録できない（英字）' do
-        @order_address.postal_code = Faker::Lorem.characters(number: 3, min_alpha: 3) + '-' + Faker::Lorem.characters(number: 4, min_alpha: 4)
+        @order_address.postal_code = Faker::Lorem.characters(number: 3,
+                                                             min_alpha: 3) + '-' + Faker::Lorem.characters(number: 4,
+                                                                                                           min_alpha: 4)
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Postal code is invalid')
       end
       it '郵便区番号が3桁でないと登録できない' do
-        @order_address.postal_code = Faker::Lorem.characters(number: 2, min_numeric: 2) + '-' + Faker::Lorem.characters(number: 4, min_numeric: 4)
+        @order_address.postal_code = Faker::Lorem.characters(number: 2,
+                                                             min_numeric: 2) + '-' + Faker::Lorem.characters(number: 4,
+                                                                                                             min_numeric: 4)
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Postal code is invalid')
-        @order_address.postal_code = Faker::Lorem.characters(number: 4, min_numeric: 4) + '-' + Faker::Lorem.characters(number: 4, min_numeric: 4)
+        @order_address.postal_code = Faker::Lorem.characters(number: 4,
+                                                             min_numeric: 4) + '-' + Faker::Lorem.characters(number: 4,
+                                                                                                             min_numeric: 4)
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Postal code is invalid')
       end
       it '郵便番号の町域番号が4桁でないと登録できない' do
-        @order_address.postal_code = Faker::Lorem.characters(number: 3, min_numeric: 3) + '-' + Faker::Lorem.characters(number: 3, min_numeric: 3)
+        @order_address.postal_code = Faker::Lorem.characters(number: 3,
+                                                             min_numeric: 3) + '-' + Faker::Lorem.characters(number: 3,
+                                                                                                             min_numeric: 3)
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Postal code is invalid')
-        @order_address.postal_code = Faker::Lorem.characters(number: 3, min_numeric: 3) + '-' + Faker::Lorem.characters(number: 5, min_numeric: 5)
+        @order_address.postal_code = Faker::Lorem.characters(number: 3,
+                                                             min_numeric: 3) + '-' + Faker::Lorem.characters(number: 5,
+                                                                                                             min_numeric: 5)
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Postal code is invalid')
       end
@@ -109,22 +119,22 @@ RSpec.describe OrderAddress, type: :model do
       it '電話番号は半角数字以外は登録できない（全角数字）' do
         @order_address.phone_number = '１２３４５６７８９８７'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is not a number")
+        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
       end
       it '電話番号は半角数字以外は登録できない（漢字）' do
         @order_address.phone_number = '亞亞亞亞亞亞亞亞亞亞亞'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is not a number")
+        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
       end
       it '電話番号は半角数字以外は登録できない（平仮名）' do
         @order_address.phone_number = 'あいうえおかきくけこさ'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is not a number")
+        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
       end
       it '電話番号は半角数字以外は登録できない（カタカナ）' do
         @order_address.phone_number = 'アイウエオカキクケコサ'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is not a number")
+        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
       end
       it '電話番号は9桁ないと登録できない' do
         @order_address.phone_number = Faker::Lorem.characters(number: 10, min_numeric: 10)
