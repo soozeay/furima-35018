@@ -1,0 +1,48 @@
+<%= render "shared/header" %>
+
+<div class='form-wrap'>
+  <div class='form-header'>
+    <h1 class='form-header-text'>
+      <%= @user.nickname + 'さんのマイページ' %>
+    </h1>
+  </div>
+
+<%= form_with model: @user, url: user_path(@user.id), local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+  
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">ニックネーム</label>
+    </div>
+    <%= f.text_field :nickname, autofocus: true %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">メールアドレス</label>
+    </div>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">生年月日</label>
+    </div>
+    <%= @user.birth_day %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">パスワード</label>
+    </div>
+    <%= f.password_field :password, autofocus: true %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">パスワード（確認）</label>
+    </div>
+    <%= f.password_field :password_confirmation, autofocus: true %>
+  </div>
+  <%= f.submit "更新する" %>
+<% end %>
+</div>
+
+
+<%= render "shared/second-footer"%>
