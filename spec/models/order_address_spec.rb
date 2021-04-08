@@ -23,141 +23,141 @@ RSpec.describe OrderAddress, type: :model do
       it 'トークンが空では登録できない' do
         @order_address.token = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Token can't be blank")
+        expect(@order_address.errors.full_messages).to include("購入情報を入力してください")
       end
       it '郵便番号が空では登録できない' do
         @order_address.postal_code = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postal code can't be blank")
+        expect(@order_address.errors.full_messages).to include("郵便番号を入力してください", "郵便番号は不正な値です")
       end
       it '郵便番号にハイフンがないと登録できない' do
         @order_address.postal_code = '1111111'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '郵便番号が数字以外では登録できない（全角数字）' do
         @order_address.postal_code = '１１１-１１１１'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '郵便番号が数字以外では登録できない（英字）' do
         @order_address.postal_code = Faker::Lorem.characters(number: 3,
                                                              min_alpha: 3) + '-' + Faker::Lorem.characters(number: 4,
                                                                                                            min_alpha: 4)
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '郵便区番号が3桁でないと登録できない' do
         @order_address.postal_code = Faker::Lorem.characters(number: 2,
                                                              min_numeric: 2) + '-' + Faker::Lorem.characters(number: 4,
                                                                                                              min_numeric: 4)
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
         @order_address.postal_code = Faker::Lorem.characters(number: 4,
                                                              min_numeric: 4) + '-' + Faker::Lorem.characters(number: 4,
                                                                                                              min_numeric: 4)
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '郵便番号の町域番号が4桁でないと登録できない' do
         @order_address.postal_code = Faker::Lorem.characters(number: 3,
                                                              min_numeric: 3) + '-' + Faker::Lorem.characters(number: 3,
                                                                                                              min_numeric: 3)
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
         @order_address.postal_code = Faker::Lorem.characters(number: 3,
                                                              min_numeric: 3) + '-' + Faker::Lorem.characters(number: 5,
                                                                                                              min_numeric: 5)
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '郵便番号が数字以外では登録できない（全角英字）' do
         @order_address.postal_code = 'ａａａ-ａａａａ'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '郵便番号が数字以外では登録できない（漢字）' do
         @order_address.postal_code = '亞亞亞-亞亞亞亞'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '郵便番号が数字以外では登録できない（平仮名）' do
         @order_address.postal_code = 'あいう-えおかき'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '郵便番号が数字以外では登録できない（カタカナ）' do
         @order_address.postal_code = 'アイウ-エオカキ'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors.full_messages).to include('郵便番号は不正な値です')
       end
       it '都道府県idが空では登録できない' do
         @order_address.prefecture_id = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Prefecture is not a number')
+        expect(@order_address.errors.full_messages).to include('都道府県は数値で入力してください')
       end
       it '都道府県のid:0では登録できない' do
         @order_address.prefecture_id = 0
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Prefecture must be other than 0')
+        expect(@order_address.errors.full_messages).to include('都道府県は0以外の値にしてください')
       end
       it '市区町村が空では登録できない' do
         @order_address.city = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("City can't be blank")
+        expect(@order_address.errors.full_messages).to include('市区町村を入力してください')
       end
       it '番地が空では登録できない' do
         @order_address.house_number = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("House number can't be blank")
+        expect(@order_address.errors.full_messages).to include('番地を入力してください')
       end
       it '電話番号が空では登録できない' do
         @order_address.phone_number = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
+        expect(@order_address.errors.full_messages).to include('電話番号を入力してください', '電話番号は数値で入力してください', '電話番号は不正な値です')
       end
       it '電話番号は半角数字以外は登録できない（全角数字）' do
         @order_address.phone_number = '１２３４５６７８９８７'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
+        expect(@order_address.errors.full_messages).to include('電話番号は数値で入力してください', '電話番号は不正な値です')
       end
       it '電話番号は半角数字以外は登録できない（漢字）' do
         @order_address.phone_number = '亞亞亞亞亞亞亞亞亞亞亞'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
+        expect(@order_address.errors.full_messages).to include('電話番号は数値で入力してください', '電話番号は不正な値です')
       end
       it '電話番号は半角数字以外は登録できない（平仮名）' do
         @order_address.phone_number = 'あいうえおかきくけこさ'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
+        expect(@order_address.errors.full_messages).to include('電話番号は数値で入力してください', '電話番号は不正な値です')
       end
       it '電話番号は半角数字以外は登録できない（カタカナ）' do
         @order_address.phone_number = 'アイウエオカキクケコサ'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
+        expect(@order_address.errors.full_messages).to include('電話番号は数値で入力してください', '電話番号は不正な値です')
       end
       it '電話番号は9桁ないと登録できない' do
         @order_address.phone_number = Faker::Lorem.characters(number: 10, min_numeric: 10)
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@order_address.errors.full_messages).to include('電話番号は不正な値です')
         @order_address.phone_number = Faker::Lorem.characters(number: 12, min_numeric: 12)
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@order_address.errors.full_messages).to include('電話番号は不正な値です')
       end
       it 'ハイフンが入っていては登録できない' do
         @order_address.phone_number = '090-1111-1111'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@order_address.errors.full_messages).to include('電話番号は数値で入力してください', '電話番号は不正な値です')
       end
       it 'user_idが空では登録できない' do
         @order_address.user_id = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("User can't be blank")
+        expect(@order_address.errors.full_messages).to include("Userを入力してください")
       end
       it 'item_idが空では登録できない' do
         @order_address.item_id = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+        expect(@order_address.errors.full_messages).to include("Itemを入力してください")
       end
     end
   end

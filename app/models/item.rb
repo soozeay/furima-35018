@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  with_options presence: true, numericality: { other_than: 0 } do
+  with_options presence: true, numericality: { other_than: 0 , message: 'を選択してください'} do
     validates :category_id
     validates :status_id
     validates :shippingfee_id
