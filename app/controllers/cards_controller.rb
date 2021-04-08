@@ -9,6 +9,11 @@ class CardsController < ApplicationController
     description: 'test', # テストカードであることを説明
     card: params[:card_token] # 登録しようとしているカード情報
     )
+    card = Card.new( # トークン化されたカード情報を保存する
+      card_token: params[:card_token], # カードトークン
+      customer_token: customer.id, # 顧客トークン
+      user_id: current_user.id # ログインしているユーザー
+    )
   end
-  
+
 end
