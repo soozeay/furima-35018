@@ -5,6 +5,9 @@ class OrdersController < ApplicationController
 
   def index
     @order_address = OrderAddress.new
+    unless current_user.card.present?
+      redirect_to user_path(current_user)
+    end
   end
 
   def create
@@ -26,15 +29,16 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order_address).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number).merge(
-      token: params[:token], user_id: current_user.id, item_id: params[:item_id]
+      user_id: current_user.id, item_id: params[:item_id]
     )
   end
 
   def pay_item
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    customer_token = current_user.card.customer_token
     Payjp::Charge.create(
       amount: set_item[:price],  # 商品の値段
-      card: order_params[:token], # カードトークン
+      customer: customer_token, # 顧客トークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end

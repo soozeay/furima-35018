@@ -13,15 +13,10 @@
         【カード番号】
         <br>
         <%= "**** **** **** " + @card[:last4] %>
-        <%# カード番号の下4桁を取得 %>
         <br>
         【有効期限】
         <br>
-        <%= @card[:exp_month] %>
-        <%# 有効期限の「月」を取得 %>
-        /
-        <%= @card[:exp_year] %>
-        <%# 有効期限の「年」を取得 %>
+        <%= @card[:exp_month] %> / <%= @card[:exp_year] %>
       </div>
     <% else %>
       <%= link_to 'クレジットカードを登録する', new_card_path(current_user) %>
