@@ -14,7 +14,6 @@ class CardsController < ApplicationController
       customer_token: customer.id, # 顧客トークン
       user_id: current_user.id # ログインしているユーザー
     )
-    binding.pry
 
     if card.save
       redirect_to user_path(current_user.id)

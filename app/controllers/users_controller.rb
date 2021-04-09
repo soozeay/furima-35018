@@ -1,12 +1,18 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :update]
 
   def show
-    @user = User.find(params[:id])
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    card = Card.find_by(user_id: current_user.id)
+    if @user.card.present?
+      customer = Payjp::Customer.retrieve(card.customer_token) 
+      @card = customer.cards.first
+    end
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update(user_params) 
+    if @user.update(user_params)
+      bypass_sign_in(@user) 
       redirect_to root_path 
     else
       binding.pry
@@ -16,8 +22,12 @@ class UsersController < ApplicationController
 
   private
 
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
-    params.require(:user).permit(:nickname, :email, :birth_day, :password, :password_confirmation) 
+    params.require(:user).permit(:nickname, :email, :password, :password_confirmation)
   end
 
 end
