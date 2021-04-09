@@ -1,0 +1,70 @@
+<%= render "shared/header" %>
+
+<div class='form-wrap'>
+  <div class='form-header'>
+    <h1 class='form-header-text'>
+      <%= @user.nickname + 'さんのマイページ' %>
+    </h1>
+    <div class="Card__title">
+      <h2>カード情報</h2>
+    </div>
+    <% if @user.card.present? %>
+      <div class="Card_info">
+        【カード番号】
+        <br>
+        <%= "**** **** **** " + @card[:last4] %>
+        <%# カード番号の下4桁を取得 %>
+        <br>
+        【有効期限】
+        <br>
+        <%= @card[:exp_month] %>
+        <%# 有効期限の「月」を取得 %>
+        /
+        <%= @card[:exp_year] %>
+        <%# 有効期限の「年」を取得 %>
+      </div>
+    <% else %>
+      <%= link_to 'クレジットカードを登録する', new_card_path(current_user) %>
+    <% end %>
+  </div>
+</div>
+
+<%= form_with model: @user, url: user_path(@user.id), local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+  
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">ニックネーム</label>
+    </div>
+    <%= f.text_field :nickname, autofocus: true %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">メールアドレス</label>
+    </div>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">生年月日</label>
+    </div>
+    <%= @user.birth_day %>
+  </div>
+    <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">パスワード</label>
+    </div>
+    <%= f.password_field :password, autofocus: true %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">パスワード（確認）</label>
+    </div>
+    <%= f.password_field :password_confirmation, autofocus: true %>
+  </div>
+  <%= f.submit "更新する" %>
+<% end %>
+</div>
+
+
+<%= render "shared/second-footer"%>
