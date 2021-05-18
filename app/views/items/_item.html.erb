@@ -3,7 +3,7 @@
     <div class='item-img-content'>
       <%= image_tag item.image, class: "item-img" %>
 
-      <% if item.order.present? %>
+      <% if item.stock == 0 %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
