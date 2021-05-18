@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   end
   belongs_to :user
   has_one_attached :image
-  has_one :order
+  has_many :orders
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   with_options presence: true, numericality: { other_than: 0 , message: 'を選択してください'} do
