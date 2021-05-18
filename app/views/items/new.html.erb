@@ -38,6 +38,11 @@
         </div>
         <%= f.text_area :desc, class:"items-text", id:"item-info", placeholder:"商品の説明（必須 1,000文字まで）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。" ,rows:"7" ,maxlength:"1000" %>
       </div>
+      <div class="weight-bold-text">
+        商品の在庫
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.text_field :stock, class:"price-input", id:"item-stock", placeholder:"例）5" %>個
     </div>
     <%# /商品名と商品説明 %>
 

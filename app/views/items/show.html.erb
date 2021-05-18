@@ -63,6 +63,10 @@
           <th class="detail-item">発送日の目安</th>
           <td class="detail-value"><%= @item.esd.name %></td>
         </tr>
+        <tr>
+          <th class="detail-item">商品の在庫</th>
+          <td class="detail-value"><%= @item.stock %>個</td>
+        </tr>
       </tbody>
     </table>
     <div class="option">
