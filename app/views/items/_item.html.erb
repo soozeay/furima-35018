@@ -3,7 +3,7 @@
     <div class='item-img-content'>
       <%= image_tag item.image, class: "item-img" %>
 
-      <% if item.order.present? %>
+      <% if item.stock == 0 %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
@@ -17,8 +17,7 @@
       <div class='item-price'>
         <span><%= item.price.to_s(:delimited, delimiter: ',') %>円<br><%= item.shippingfee.name %></span>
         <div class='star-btn'>
-          <%= image_tag "star.png", class:"star-icon" %>
-          <span class='star-count'>0</span>
+          <%= "在庫：#{item.stock} 個" %>
         </div>
       </div>
     </div>

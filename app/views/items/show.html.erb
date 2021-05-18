@@ -8,13 +8,6 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
-
-      <% if @item.order.present? %>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div>
-      <% end %>
-
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -24,7 +17,7 @@
       </span>
     </div>
 
-   <% if user_signed_in? && @item.order.blank? %>
+   <% if user_signed_in? %>
     <% if current_user == @item.user %>
       <%= link_to "商品の編集", edit_item_path, class: "item-red-btn" %>
       <p class="or-text">or</p>
@@ -62,6 +55,10 @@
         <tr>
           <th class="detail-item">発送日の目安</th>
           <td class="detail-value"><%= @item.esd.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">商品の在庫</th>
+          <td class="detail-value"><%= @item.stock %>個</td>
         </tr>
       </tbody>
     </table>

@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_04_08_111726) do
     t.string "name", null: false
     t.text "desc", null: false
     t.integer "price", null: false
+    t.integer "stock", null: false
     t.bigint "user_id", null: false
     t.integer "category_id", null: false
     t.integer "status_id", null: false
@@ -101,4 +102,6 @@ ActiveRecord::Schema.define(version: 2021_04_08_111726) do
   add_foreign_key "addresses", "orders"
   add_foreign_key "cards", "users"
   add_foreign_key "items", "users"
+  add_foreign_key "orders", "items"
+  add_foreign_key "orders", "users"
 end

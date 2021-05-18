@@ -4,10 +4,11 @@ class Item < ApplicationRecord
     validates :desc
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
     validates :image
+    validates :stock
   end
   belongs_to :user
   has_one_attached :image
-  has_one :order
+  has_many :orders
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   with_options presence: true, numericality: { other_than: 0 , message: 'を選択してください'} do
