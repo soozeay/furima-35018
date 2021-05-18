@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
     if @order_address.valid?
       pay_item
       @order_address.save
+      @item.stock -= 1
       redirect_to root_path
     else
       render :index
