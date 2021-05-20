@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   has_one_attached :image
   has_many :orders
   has_many :lineitems, dependent: :destroy
+  has_many :carts, through: :lineitems
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   with_options presence: true, numericality: { other_than: 0 , message: 'を選択してください'} do

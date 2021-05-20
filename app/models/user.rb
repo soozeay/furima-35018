@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :items
   has_many :orders
   has_one :card, dependent: :destroy
+  has_one :cart, dependent: :destroy
 
   validates :password, :password_confirmation, format: { with: /\A(?=.*?[a-z])(?=.*?[\d)])[a-z\d]+\z/i }
 
