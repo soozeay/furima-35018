@@ -1,65 +1,100 @@
 <%= render "shared/header" %>
-
-<div class='form-wrap'>
-  <div class='form-header'>
-    <h1 class='form-header-text'>
-      <%= @user.nickname + 'さんのマイページ' %>
-    </h1>
-    <div class="Card__title">
+<h1 class='page-header'><%= @user.nickname + 'さんのマイページ' %></h1>
+<% if @user == current_user %>
+<div class='info-wrap'>
+  <div class='card-wrap'>
+    <div class='card-title'>
       <h2>カード情報</h2>
     </div>
     <% if @user.card.present? %>
-      <div class="Card_info">
-        【カード番号】
-        <br>
-        <%= "**** **** **** " + @card[:last4] %>
-        <br>
-        【有効期限】
-        <br>
-        <%= @card[:exp_month] %> / <%= @card[:exp_year] %>
-      </div>
+      <table class='card-infomation'>
+        <tbody>
+          <tr class='card-table-cell'>
+            <th>【カード番号】</th>
+            <td><%= "**** **** **** " + @card[:last4] %></td>
+          </tr>
+          <tr class='card-table-cell'>
+            <th>【有効期限】</th>
+            <td><%= @card[:exp_month] %> / <%= @card[:exp_year] %></td>
+          </tr>
+        </tbody>
+      </table>
     <% else %>
       <%= link_to 'クレジットカードを登録する', new_card_path(current_user) %>
     <% end %>
   </div>
+  <div class='form-wrap'>
+    <%= form_with model: @user, url: user_path(@user.id), local: true do |f| %>
+      <%= render 'shared/error_messages', model: f.object %>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">ニックネーム</label>
+        </div>
+        <%= f.text_field :nickname, autofocus: true %>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">メールアドレス</label>
+        </div>
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">パスワード</label>
+        </div>
+        <%= f.password_field :password, autofocus: true %>
+      </div>
+      <div class="form-group">
+        <div class='form-text-wrap'>
+          <label class="form-text">パスワード（確認）</label>
+        </div>
+        <%= f.password_field :password_confirmation, autofocus: true %>
+      </div>
+      <div class="submit-btn-contents">
+        <%= f.submit "更新する", class:'submit-btn' %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= form_with model: @user, url: user_path(@user.id), local: true do |f| %>
-  <%= render 'shared/error_messages', model: f.object %>
-  
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">ニックネーム</label>
-    </div>
-    <%= f.text_field :nickname, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">メールアドレス</label>
-    </div>
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">生年月日</label>
-    </div>
-    <%= @user.birth_day %>
-  </div>
-    <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">パスワード</label>
-    </div>
-    <%= f.password_field :password, autofocus: true %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">パスワード（確認）</label>
-    </div>
-    <%= f.password_field :password_confirmation, autofocus: true %>
-  </div>
-  <%= f.submit "更新する" %>
 <% end %>
+<div class='order-wrap' id="js-tab">
+  <div class="user-nav-bar">
+    <div class="nav-title">
+      <% if @user != current_user %>
+        <a href="", class="tab-nav-item is-active" data-nav="0"><%= @user.nickname + " さんの出品した商品" %></a>
+      <% else %>
+        <a href="", class="tab-nav-item is-active" data-nav="0"><%= '自分の出品した商品' %></a>
+        <a href="", class="tab-nav-item" data-nav="1"><%= '販売履歴' %></a> 
+        <a href="", class="tab-nav-item" data-nav="1"><%= '購入履歴' %></a>
+        <a href="", class="tab-nav-item" data-nav="2"><%= 'カートに入れた商品' %></a>
+      <% end %>
+    </div>
+    </div>
+    <div class="nav-items" data-content="0">
+      <ul class='item-lists'>
+        <%= render partial: "items/item", collection: @items, locals: {item: @item} %>
+      </ul>
+      <% unless @items.present? %>
+        出品した商品はありません
+      <% end %>
+    </div>
+    <div class="nav-items" data-content="1">
+      <ul class='item-lists'>
+        <%= render partial: "sold_items" %>
+      </ul>
+    </div>
+    <div class="nav-items" data-content="2">
+      <% if @ordered_items.present? %>
+        <ul class='item-lists'>
+          <%= render partial: "ordered_items" %>
+        </ul>
+      <% else %>
+        購入した商品はありません
+      <% end %>
+    </div>
+    <div class="nav-items" data-content="3">
+      <%= 'カートに入れた商品を書いていきます' %>
+    </div>
 </div>
-
 
 <%= render "shared/second-footer"%>
