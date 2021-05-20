@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   has_many :orders
-  has_many :line_items, dependent: :destroy
+  has_many :lineitems, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   with_options presence: true, numericality: { other_than: 0 , message: 'を選択してください'} do
