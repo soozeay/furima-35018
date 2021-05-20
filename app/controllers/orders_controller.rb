@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:index, :create]
-  before_action :move_to_index
+  before_action :set_item, only: [:index, :create, :show]
+  before_action :move_to_index, except: :show
 
   def index
     @order_address = OrderAddress.new
@@ -21,6 +21,13 @@ class OrdersController < ApplicationController
     else
       render :index
     end
+  end
+
+  def show
+    redirect_to root_path if @item.user.id != current_user.id
+    @order = Order.find(params[:id])
+    @address = Address.find_by(order_id: @order.id)
+    @prefecture = Prefecture.find(@address.prefecture_id)
   end
 
   private
