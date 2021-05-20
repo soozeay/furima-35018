@@ -1,0 +1,52 @@
+<%= render "shared/header" %>
+
+<%# 商品の概要 %>
+<div class="item-show">
+  <h1>取引完了商品の概要</h1>
+  <div class="item-box">
+    <h2 class="name">
+      <%= @item.name %>
+    </h2>
+    <div class="item-img-content">
+      <%= image_tag @item.image ,class:"item-box-img" %>
+    </div>
+    <div class="item-price-box">
+      <span class="item-price">
+      <%= "¥ #{@item.price.to_s(:delimited, delimiter: ',')}" %></span>
+      <span class="item-postage">
+        <%= @item.shippingfee.name %>
+      </span>
+    </div>
+    <table class="detail-table">
+      <h3>配送先</h3>
+      <tbody>
+        <tr>
+          <th class="detail-item">郵便番号</th>
+          <td class="detail-value">〒<%= @address.postal_code %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">都道府県</th>
+          <td class="detail-value"><%= @prefecture.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">市区町村</th>
+          <td class="detail-value"><%= @address.city %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">番地</th>
+          <td class="detail-value"><%= @address.house_number %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">建物名</th>
+          <td class="detail-value"><%= @address.building_name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">電話番号</th>
+          <td class="detail-value"><%= @address.phone_number %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <%# /商品の概要 %>
+
+<%= render "shared/footer" %>

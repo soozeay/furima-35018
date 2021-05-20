@@ -8,6 +8,8 @@ class UsersController < ApplicationController
       customer = Payjp::Customer.retrieve(card.customer_token) 
       @card = customer.cards.first
     end
+    @items = @user.items.order('created_at DESC')
+    @ordered_items = @user.orders
   end
 
   def update
@@ -15,7 +17,6 @@ class UsersController < ApplicationController
       bypass_sign_in(@user) 
       redirect_to root_path 
     else
-      binding.pry
       redirect_to user_path
     end
   end
