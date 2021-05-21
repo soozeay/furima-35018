@@ -65,8 +65,8 @@
       <% else %>
         <a href="", class="tab-nav-item is-active" data-nav="0"><%= '自分の出品した商品' %></a>
         <a href="", class="tab-nav-item" data-nav="1"><%= '販売履歴' %></a> 
-        <a href="", class="tab-nav-item" data-nav="1"><%= '購入履歴' %></a>
-        <a href="", class="tab-nav-item" data-nav="2"><%= 'カートに入れた商品' %></a>
+        <a href="", class="tab-nav-item" data-nav="2"><%= '購入履歴' %></a>
+        <a href="", class="tab-nav-item" data-nav="3"><%= 'カートに入れた商品' %></a>
       <% end %>
     </div>
     </div>
@@ -79,27 +79,13 @@
       <% end %>
     </div>
     <div class="nav-items" data-content="1">
-      <ul class='item-lists'>
         <%= render partial: "sold_items" %>
-      </ul>
     </div>
     <div class="nav-items" data-content="2">
-      <% if @ordered_items.present? %>
-        <ul class='item-lists'>
-          <%= render partial: "ordered_items" %>
-        </ul>
-      <% else %>
-        購入した商品はありません
-      <% end %>
+      <%= render partial: "ordered_items" %>
     </div>
     <div class="nav-items" data-content="3">
-      <% if @my_line_items.present? %>
-        <ul class='item-lists'>
-          <%= render partial: "cart_items" %>
-        </ul>
-      <% else %>
-        カートに入れた商品はありません
-      <% end %>
+      <%= render partial: "cart_items" %>
     </div>
 </div>
 

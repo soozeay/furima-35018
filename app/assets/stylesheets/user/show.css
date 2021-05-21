@@ -30,3 +30,10 @@
 .drop-shadow{
   box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
 }
+
+.nav-items{
+  height: 100%;
+  display: flex;
+  display: none;
+  flex-wrap: wrap;
+}

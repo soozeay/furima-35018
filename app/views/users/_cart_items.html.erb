@@ -1,29 +1,35 @@
-<% @my_line_items.each do |mi| %>
-  <% item = Item.find(mi.item_id) %>
-  <li class='list drop-shadow'>
-    <%= link_to item_path(item.id) do %>
-      <div class='item-img-content'>
-        <%= image_tag item.image, class: "item-img" %>
-        <% if item.stock == 0 %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
+<% if @my_line_items.present? %>
+  <ul class='item-lists'>
+    <% @my_line_items.each do |mi| %>
+      <% search_item(mi) %>
+      <li class='list drop-shadow'>
+        <%= link_to item_path(@item.id) do %>
+          <div class='item-img-content'>
+            <%= image_tag @item.image, class: "item-img" %>
+            <% if @item.stock == 0 %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+            <% end %>
           </div>
         <% end %>
-      </div>
-    <% end %>
-    <div class='item-info'>
-      <h3 class='item-name'>
-        <%= item.name %>
-      </h3>
-      <div class='item-price'>
-        <span><%= item.price.to_s(:delimited, delimiter: ',') %>円<br><%= item.shippingfee.name %></span>
-        <div class='star-btn'>
-          <%= "在庫：#{item.stock} 個" %>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= @item.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= @item.price.to_s(:delimited, delimiter: ',') %>円<br><%= @item.shippingfee.name %></span>
+            <div class='star-btn'>
+              <%= "在庫：#{@item.stock} 個" %>
+            </div>
+          </div>
+          <div class="order-btn">
+            <%= link_to "購入画面に進む", item_orders_path(@item.id) %>
+          </div>
         </div>
-      </div>
-      <div class="order-btn">
-        <%= link_to "購入画面に進む", item_orders_path(item.id) %>
-      </div>
-    </div>
-  </li>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  カートに入れた商品はありません
 <% end %>
