@@ -93,7 +93,13 @@
       <% end %>
     </div>
     <div class="nav-items" data-content="3">
-      <%= 'カートに入れた商品を書いていきます' %>
+      <% if @my_line_items.present? %>
+        <ul class='item-lists'>
+          <%= render partial: "cart_items" %>
+        </ul>
+      <% else %>
+        カートに入れた商品はありません
+      <% end %>
     </div>
 </div>
 

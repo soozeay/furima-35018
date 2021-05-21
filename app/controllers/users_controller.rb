@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     end
     @items = @user.items.order('created_at DESC')
     @ordered_items = @user.orders
+    @my_line_items = Lineitem.where(cart_id: current_user.cart.id)
   end
 
   def update

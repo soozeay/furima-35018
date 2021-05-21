@@ -15,8 +15,9 @@ class OrdersController < ApplicationController
     if @order_address.valid?
       pay_item
       @order_address.save
-      @item.stock -= 1
+      @item.stock -= @buy_quantity
       @item.save
+      @line_item.destroy
       redirect_to root_path
     else
       render :index
@@ -34,6 +35,8 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+    @line_item = Lineitem.find_by(cart_id: current_user.cart.id)
+    @buy_quantity = @line_item.quantity
   end
 
   def order_params
@@ -46,7 +49,7 @@ class OrdersController < ApplicationController
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     customer_token = current_user.card.customer_token
     Payjp::Charge.create(
-      amount: set_item[:price],  # 商品の値段
+      amount: @item.price * @buy_quantity,  # 商品の値段
       customer: customer_token, # 顧客トークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )

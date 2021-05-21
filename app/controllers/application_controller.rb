@@ -14,4 +14,14 @@ class ApplicationController < ActionController::Base
       username == ENV['BASIC_AUTH_USER'] && password == ENV['BASIC_AUTH_PASSWORD']
     end
   end
+
+  def current_cart
+    if current_user
+      current_cart = Cart.find_or_create_by(user_id: current_user.id)
+    else
+      current_cart = Cart.find_or_create_by(id: session[:cart_id])
+      session[:cart_id] = current_cart.id
+    end
+      current_cart
+  end
 end
