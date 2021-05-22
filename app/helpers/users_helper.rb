@@ -15,5 +15,9 @@ module UsersHelper
     return @item
   end
 
+  def search_coupons
+    @coupons = Coupon.where(user_id: current_user.id)
+    return @coupons
+  end
 
 end
