@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_083549) do
     t.integer "content_id", null: false
     t.bigint "user_id", null: false
     t.boolean "is_valid", default: true
+    t.integer "limit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_coupons_on_user_id"
