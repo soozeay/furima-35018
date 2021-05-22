@@ -1,11 +1,18 @@
 class Coupon < ApplicationRecord
   belongs_to :user
 
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :content
+  validates :content_id, presence: true
+
+
   enum is_valid: { '有効': true, '無効': false }
 
-  def self.coupon_create(user)
-    coupon = Coupon.new(user_id: user.id, limit: 1)
-    coupon.save
+  def coupon_create
+    @users = User.where(id: (Order.order("RAND()").limit(3)).user_id)
+    @users.each do |i|
+      coupon = Coupon.create(user_id: user.id, content_id: i, limit: 1)
+    end
   end
 
   def self.coupon_destroy
@@ -18,5 +25,5 @@ class Coupon < ApplicationRecord
       end
     end
   end
-  
+
 end
