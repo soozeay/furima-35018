@@ -2,8 +2,14 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: #333333;
+ }
+
 .top-page-header {
   width: 100vw;
+  height: 10vh;
   padding: 2vh 15vw;
   display: flex;
   flex-direction: column;
@@ -49,32 +55,33 @@
   font-size: 18px;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   width: 100%;
   padding: 1vh 0;
+  z-index: 500;
 }
 
 .lists-left {
-  display: flex;
   min-width: 200px;
-
+  display: none;
+  background-color: #ffffff;
+  text-decoration: none;
+  color: #333333;
+  padding: 10px;
 }
 
-.category-list {
+.contents{
+  margin-bottom: 10px;
+}
+
+.category-header {
   text-decoration: none;
   margin-right: 3vw;
-  color: #333333;
-}
-
-.brand-list {
-  text-decoration: none;
   color: #333333;
 }
 
 .lists-right {
   display: flex;
   list-style: none;
-  align-items: flex-end;
 }
 
 

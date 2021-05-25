@@ -10,10 +10,21 @@
     </form>
   </div>
   <div class='nav'>
-    <ul class='lists-left'>
-      <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
-      <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
-    </ul>
+    <div class="drop-down-nav", id="js-list">
+      <%= link_to 'カテゴリー', "#", class: "category-header", hovercolor:"#3ccace" %>
+      <ul class='lists-left', id="js-pull-down">
+        <li class="contents"><%= link_to 'レディース', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'メンズ', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'ベビー・キッズ', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'インテリア・住まい・小物', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to '本・音楽・ゲーム', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'おもちゃ・ホビー・グッズ', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to '家電・スマホ・カメラ', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'スポーツ・レジャー', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'ハンドメイド', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'その他', "#", hovercolor:"#3ccace" %></li>
+      </ul>
+    </div>
     <ul class='lists-right'>
       <% if user_signed_in? %>
        <li><%= link_to current_user.nickname, user_path(current_user), class: "user-nickname" %></li> 
