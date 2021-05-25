@@ -13,16 +13,16 @@
     <div class="drop-down-nav", id="js-list">
       <%= link_to 'カテゴリー', "#", class: "category-header", hovercolor:"#3ccace" %>
       <ul class='lists-left', id="js-pull-down">
-        <li class="contents"><%= link_to 'レディース', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to 'メンズ', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to 'ベビー・キッズ', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to 'インテリア・住まい・小物', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to '本・音楽・ゲーム', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to 'おもちゃ・ホビー・グッズ', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to '家電・スマホ・カメラ', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to 'スポーツ・レジャー', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to 'ハンドメイド', "#", hovercolor:"#3ccace" %></li>
-        <li class="contents"><%= link_to 'その他', "#", hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'レディース', items_path(category_id: 1), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'メンズ', items_path(category_id: 2), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'ベビー・キッズ', items_path(category_id: 3), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'インテリア・住まい・小物', items_path(category_id: 4), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to '本・音楽・ゲーム', items_path(category_id: 5), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'おもちゃ・ホビー・グッズ', items_path(category_id: 6), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to '家電・スマホ・カメラ', items_path(category_id: 7), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'スポーツ・レジャー', items_path(category_id: 8), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'ハンドメイド', items_path(category_id: 9), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'その他', items_path(category_id: 10), hovercolor:"#3ccace" %></li>
       </ul>
     </div>
     <ul class='lists-right'>
