@@ -1,0 +1,22 @@
+<% search_coupons %>
+<% if @coupons.present? %>
+  <ul class='item-lists'>
+    <% @coupons.each do |coupon| %>
+      <li class='list drop-shadow'>
+        <div class='item-img-content'>
+          <% #image_tag @item.image, class: "item-img" %>
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= coupon.content.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= "有効期限： あと#{coupon.limit}日" %></span>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  有効なクーポンはありません
+<% end %>
