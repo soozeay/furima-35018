@@ -10,6 +10,7 @@ class ItemsController < ApplicationController
     else
       @items = Item.includes(:user).order('created_at DESC')
     end
+
   end
 
   def new
@@ -45,6 +46,10 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     redirect_to root_path
+  end
+
+  def search
+    @items = @items.where.not(stock: 0)
   end
 
   private
