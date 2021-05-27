@@ -4,7 +4,7 @@ a {
 }
 
 .main {
-  background: #f8f8f8;
+  padding: 0 15vw;
 }
 
 /* 画面上部の「人生を変えるフリマアプリ」帯部分 */
@@ -279,7 +279,7 @@ a {
   font-weight: bold;
 }
 
-.item-contents > .subtitle {
+.subtitle {
   font-size: 3vh;
   margin: 1vh 0;
   text-decoration: none;
@@ -299,10 +299,12 @@ a {
           justify-content: center;
 }
 
-.item-lists > .list {
+.list {
   width: 37vh;
   padding: 1vw;
   background-color: #FFF;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .item-img-content {
@@ -348,25 +350,6 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-
-.star-btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.star-icon {
-  height: 2vh;
-  width: 2vh;
-  margin-right: 0.5vw;
-}
-
-.star-count {
-  font-size: 2vh;
 }
 
 /* //商品一覧 */
