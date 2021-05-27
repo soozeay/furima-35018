@@ -4,7 +4,12 @@ class ItemsController < ApplicationController
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.includes(:user).order('created_at DESC')
+    if params[:category_id].present?
+      @category_items = Item.includes(:user).where(category_id: params[:category_id])
+      @items = @category_items.where.not(stock: 0).order('created_at DESC')
+    else
+      @items = Item.includes(:user).order('created_at DESC')
+    end
 
   end
 
@@ -41,6 +46,10 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     redirect_to root_path
+  end
+
+  def search
+    @items = @items.where.not(stock: 0)
   end
 
   private

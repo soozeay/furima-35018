@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :basic_auth
+  before_action :set_search
 
   private
 
@@ -23,5 +24,10 @@ class ApplicationController < ActionController::Base
       session[:cart_id] = current_cart.id
     end
       current_cart
+  end
+
+  def set_search
+    @q = Item.ransack(params[:q])
+    @items = @q.result(distinct: true)
   end
 end

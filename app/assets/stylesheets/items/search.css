@@ -1,0 +1,44 @@
+.search-main{
+  display: flex;
+  padding: 8vh 10vw;
+}
+
+.search-bar{
+  padding: 1vw;
+  width: 20vw;
+  background-color:lightgray;
+}
+
+.nav-title{
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.item-container{
+  margin-left: 5vw;
+}
+
+.search-item-lists{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-nav-content{
+  margin-bottom: 20px;
+  display: block;
+}
+
+.search-select-box{
+  height: 40px;
+  padding: 10px;
+}
+
+.search-label{
+  width: 20vw;
+}
+
+.input-price{
+  width: 90px;
+  padding: 0 5px;
+}

@@ -1,0 +1,45 @@
+<%= render "shared/header" %>
+<div class='search-main'>
+  <div class="search-bar">
+    <%= search_form_for @q, url: items_search_path do |f| %>
+      <div class="nav-title">詳細検索</div>
+      <ul>
+      <li class="search-nav-content">
+        <p><%= f.label "カテゴリーを選択する" %></p>
+        <%= f.collection_select :category_id_eq, Category.where.not(id: 0), :id, :name, include_blank: "カテゴリーの選択", class:"search-select-box"  %>
+      </li>
+      <li class="search-nav-content">
+        <p><%= f.label "商品の状態" %></p>
+        <%= f.collection_select :status_id_eq, Status.where.not(id: 0), :id, :name, include_blank: "商品の状態の選択"  %>
+      </li>
+      <li class="search-nav-content">
+        <p><%= f.label "価格" %></p>
+        <%= f.number_field :price_gteq, class:"input-price", placeholder: "¥Min" %> 〜
+        <%= f.number_field :price_lt, class:"input-price", placeholder: "¥Max" %>
+      </li>
+      <li class="search-nav-content">
+        <p><%= f.label "配送費" %></p>
+        <%= f.collection_select :shippingfee_id_eq, Shippingfee.where.not(id: 0), :id, :name, include_blank: "配送費の選択"  %>
+      </li>
+      <%= f.submit '検索する' %>
+      </ul>
+    <% end %>
+  </div>
+  <div class="item-container">
+    <% if @q.name_cont != nil %>
+      <h3 class="subtitle"><%= "#{@q.name_cont} の検索結果" %></h3>
+    <% else %>
+      <h3 class="subtitle"><%= "検索結果" %></h3>
+    <% end %>
+    <ul class='search-item-lists'>
+      <%= render partial:"item", collection: @items, locals: {item: @item} %>
+    </ul>
+  </div>
+</div>
+<% if user_signed_in? %>
+  <%= link_to( new_item_path, class: 'purchase-btn') do %>
+    <span class='purchase-btn-text'>出品する</span>
+    <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+  <% end %>
+<% end %>
+<%= render "shared/footer" %>

@@ -2,21 +2,34 @@
 <header class='top-page-header'>
   <div class='search-bar-contents'>
     <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "/" %>
-    <form class="search-form" action="#">
-      <input class='input-box' placeholder='キーワードから探す'>
-      <button class="search-button">
+
+    <%= search_form_for @q, url: items_search_path, class:"search-form" do |f| %>
+      <%= f.search_field :name_cont, placeholder: 'キーワードから探す', class:'input-box' %>
+      <%= f.button type: "submit", class:"search-button" do%>
         <%= image_tag "search.png", class:"search-icon" %>
-      </button>
-    </form>
+      <% end %>
+    <% end %>
+
   </div>
   <div class='nav'>
-    <ul class='lists-left'>
-      <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
-      <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
-    </ul>
+    <div class="drop-down-nav", id="js-list">
+      <%= link_to 'カテゴリー', "#", class: "category-header", hovercolor:"#3ccace" %>
+      <ul class='lists-left', id="js-pull-down">
+        <li class="contents"><%= link_to 'レディース', items_path(category_id: 1), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'メンズ', items_path(category_id: 2), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'ベビー・キッズ', items_path(category_id: 3), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'インテリア・住まい・小物', items_path(category_id: 4), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to '本・音楽・ゲーム', items_path(category_id: 5), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'おもちゃ・ホビー・グッズ', items_path(category_id: 6), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to '家電・スマホ・カメラ', items_path(category_id: 7), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'スポーツ・レジャー', items_path(category_id: 8), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'ハンドメイド', items_path(category_id: 9), hovercolor:"#3ccace" %></li>
+        <li class="contents"><%= link_to 'その他', items_path(category_id: 10), hovercolor:"#3ccace" %></li>
+      </ul>
+    </div>
     <ul class='lists-right'>
       <% if user_signed_in? %>
-       <li><%= link_to current_user.nickname, user_path(current_user), class: "user-nickname" %></li> 
+       <li><%= link_to 'マイページ', user_path(current_user), class: "user-nickname" %></li> 
        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>
       <% else %>
       <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
