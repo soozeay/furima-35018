@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     if @user.card.present?
       customer = Payjp::Customer.retrieve(card.customer_token) 
       @card = customer.cards.first
+    else
+      current_cart
     end
     @items = @user.items.order('created_at DESC')
     @ordered_items = @user.orders
