@@ -66,6 +66,11 @@ https://furima-35018.herokuapp.com/
 
 
 
+# テーブル設計
+
+## ER図
+![furima-35018](https://user-images.githubusercontent.com/80019801/120108995-909cf400-c1a2-11eb-8347-43c91258756f.png)
+
 
 ## users テーブル
 | Column             | Type    | Options                   |
@@ -83,7 +88,7 @@ https://furima-35018.herokuapp.com/
 ### Association
 - has_many: items
 - has_many: orders
-- has_many: comments
+- has_one: cart
 
 
 ## items テーブル
@@ -92,6 +97,7 @@ https://furima-35018.herokuapp.com/
 | name           | string     | null: false                   |
 | desc           | text       | null: false                   |
 | price          | integer    | null: false                   |
+| stock          | integer    | null: false                   |
 | user           | references | null: false foreign_key: true |
 | category_id    | integer    | null: false                   |
 | status_id      | integer    | null: false                   |
@@ -104,20 +110,8 @@ https://furima-35018.herokuapp.com/
 ### Association
 - belongs_to: user
 - has_one: order
-- has_many: comments
-
-
-## comments テーブル
-| Column  | Type       | Options                       |
-| ------- | ---------- | ----------------------------- |
-| comment | text       | null: false                   |
-| user    | references | null: false foreign_key: true |
-| item    | references | null: false foreign_key: true |
-
-### Association
-- belongs_to: user
-- belongs_to: item
-
+- has_many :lineitems, dependent: :destroy
+- has_many :carts, through: :lineitems
 
 
 ## orders テーブル
@@ -146,3 +140,21 @@ https://furima-35018.herokuapp.com/
 
 ### Association
 - belongs_to: order
+
+
+## cartsテーブル
+| Column | Type       | Options                       |
+| ------ | ---------- | ----------------------------- |
+| user   | references | null: false foreign_key: true |
+
+### Association
+- has_many :lineitems, dependent: :destroy
+- has_many :carts, through: :lineitems
+- belongs_to :user
+
+## lineitemsテーブル
+| Column   | Type       | Options                       |
+| -------- | ---------- | ----------------------------- |
+| cart     | references | null: false foreign_key: true |
+| item     | references | null: false foreign_key: true |
+| quantity | integer    | default: 0                    |
