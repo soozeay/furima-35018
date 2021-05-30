@@ -6,8 +6,8 @@ module UsersHelper
   end
 
   def search_sold_item(order)
-    item = Item.find(order.item_id)
-    return item
+    @item = Item.find(order.item_id)
+    return @item
   end
 
   def search_item(oi)
