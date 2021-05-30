@@ -9,16 +9,6 @@ class ApplicationController < ActionController::Base
                                       keys: [:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :birth_day])
   end
 
-  # def current_cart
-  #   if current_user
-  #     current_cart = Cart.find_or_create_by(user_id: current_user.id)
-  #   else
-  #     current_cart = Cart.find_or_create_by(id: session[:cart_id])
-  #     session[:cart_id] = current_cart.id
-  #   end
-  #     current_cart
-  # end
-
   def set_search
     @q = Item.ransack(params[:q])
     @items = @q.result(distinct: true)
