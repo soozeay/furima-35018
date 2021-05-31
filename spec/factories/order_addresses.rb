@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :order_address do
-    token          { 'tok_' + Faker::Lorem.characters(number: 28) }
     postal_code    do
       Faker::Lorem.characters(number: 3, min_numeric: 3) + '-' + Faker::Lorem.characters(number: 4, min_numeric: 4)
     end

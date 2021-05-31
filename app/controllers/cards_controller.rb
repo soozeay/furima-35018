@@ -18,7 +18,6 @@ class CardsController < ApplicationController
     if card.save
       redirect_to user_path(current_user.id)
     else
-      binding.pry
       redirect_to "new"
     end
   end
